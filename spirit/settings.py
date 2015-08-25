@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'spirit.comment.flag.admin',
     'spirit.comment.history',
     'spirit.comment.like',
+    'spirit.comment.poll',
 
     # 'spirit.core.tests'
 ]
