@@ -474,14 +474,17 @@ class TopicPollTemplateTagsTest(TestCase):
     def test_render_poll_form_user(self):
         """
         should load initial or not
+
+        Change lambda : True to True
+        https://docs.djangoproject.com/en/1.10/releases/1.10/#user-is-auth-anon-deprecation
         """
         poll_choice = TopicPollChoice.objects.create(poll=self.poll, description="op2")
         TopicPollVote.objects.create(user=self.user, choice=poll_choice)
 
-        self.user.is_authenticated = lambda: True
+        self.user.is_authenticated = True
         context = render_poll_form(self.topic, self.user)
         self.assertDictEqual(context['form'].initial, {'choices': poll_choice})
 
-        self.user.is_authenticated = lambda: False
+        self.user.is_authenticated = False
         context = render_poll_form(self.topic, self.user)
         self.assertDictEqual(context['form'].initial, {})
